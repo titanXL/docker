@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t titanxl/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run titanxl/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t titanxl/multi-client ./client
+  - docker build -t titanxl/multi-nginx ./nginx
+  - docker build - titanxl/multi-sever ./server
+  - docker build - titanxl/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --pasword-stdin
+
+  -docker push titanxl/multi-client
+  -docker push titanxl/multi-nginx
+  -docker push titanxl/multi-server
+  -docker push titanxl/multi-worker
