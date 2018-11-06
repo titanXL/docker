@@ -12,7 +12,7 @@ after_success:
   - docker build -t titanxl/multi-nginx ./nginx
   - docker build -t titanxl/multi-sever ./server
   - docker build -t titanxl/multi-worker ./worker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --pasword-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
   - docker push titanxl/multi-client
   - docker push titanxl/multi-nginx
