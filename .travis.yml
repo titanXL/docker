@@ -10,8 +10,8 @@ script:
 after_success:
   - docker build -t titanxl/multi-client ./client
   - docker build -t titanxl/multi-nginx ./nginx
-  - docker build - titanxl/multi-sever ./server
-  - docker build - titanxl/multi-worker ./worker
+  - docker build -t titanxl/multi-sever ./server
+  - docker build -t titanxl/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --pasword-stdin
 
   - docker push titanxl/multi-client
